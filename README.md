@@ -143,7 +143,6 @@ This mutual dependency creates a circular reference. When the code executes, it 
 ### 1. Leads to confusion and difficulties in clarity, readability and to understand (Spaghetti Code).
 ### 2. Increases cognitive load for developers to keep track the independencies and understand how the data flows.
 ### 3. It complicates the debugging process and can make the code harder to maintain.
-### 4. 
 
 ## What is the solution to avoid this situation?
 
