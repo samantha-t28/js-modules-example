@@ -35,17 +35,35 @@ function dimension(width, height) {
 export { name, dimension };
 
 ```
+### However, this isn't necessarily redunatnt; rather, it's a feature of the module system.
 
 * After you export functions, variables, or classes from a module, you can use them in other modules by using the `import` keyword. You should include the names of the items you want to import inside the curly braces {}. This syntax is necessary for named exports.
 
+## There are two types of `Imports`, and what are the differences?
+
 * `import`  statements are typically placed at the top of the module or script because they are handled first, helping the browser engine load all the dependencies beforehand. Also it's easier to analyze the dependencies.
+
+### 1. Named Imports
 
 #### Example Code:
 ```javascript
-import { squareDimension } from ".js/square.js";
+import { name, dimension } from ".js/square.js";
 ```
+* This is a form of selective imports that allows you to import only specific exports from a module
+* If `square.js` contains multiple exports but you are only interested in using `name` and `dimension`, you would use named imports to bring only these two into your current file.
 
-* `export default`  is a feature where it primarily specifies a default function or class to export, representing the main functionality provided by the module. This is especially useful when one function or class is the clear primary focus. Curly braces are not required when importing a default export because only one default per module is allowed.
+### 2. Namespace Imports
+
+#### Example Code:
+```javascript
+import * as Square ".js/square.js";
+```
+* This is handy when a module exports a large number of items
+* This method imports all exports from the specified module as properties of a single object
+
+
+## `export default`  
+* is a feature where it primarily specifies a default function or class to export, representing the main functionality provided by the module. This is especially useful when one function or class is the clear primary focus. Curly braces are not required when importing a default export because only one default per module is allowed.
 
 #### Example Code
 
@@ -196,6 +214,7 @@ function eatStrawberry() {
 export { eatGrape, eatStrawberry };
 
 ```
+
 
 
 
