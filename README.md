@@ -215,6 +215,42 @@ export { eatGrape, eatStrawberry };
 
 ```
 
+## What is Dynamic Module Imports?
 
+`Dynamic Module Imports` In the application, certain codes are only loaded after the initial page load, some are loaded at a later point, and others are not loaded at all. In contrast, `static imports`, as seen in the examples above, download all the modules when the user loads the browser.
 
+#### Example (Dynamic Module Imports):
 
+**math.js**
+```javascript
+function addition( x , y ){
+    return x + y;
+}
+
+function subtraction( x, y ){
+    return x - y;
+}
+
+export {addition, subtraction};
+```
+**index.js**
+```javascript
+// Ensuring the button exists and importing modules only when needed.
+const button = document.querySelector(".button");
+
+button.addEventListener("click", () => {
+
+    import('./math.js').then(({ addition, subtraction }) => {
+        // Example use of the imported functions
+        console.log(addition(10, 5));
+        console.log(subtraction(10, 5));
+    }).catch(error => {
+        console.error("Failed to load the module:", error);
+    });
+});
+```
+* This example demonstrates how to load modules on-demand when a button is clicked.
+* Dynamic Module Imports return a Promise that can be in a pending, fulfilled, or rejected state.
+* The 'pending' state occurs as the code awaits the user's click event. Once clicked, the import promise tries to fulfill by loading the module and executing the code within the `.then()` block.
+* The .then() block receives the module from math.js as its argument. It uses the destructuring method to extract the addition and subtraction functions directly from the module object (the entire set of exports from the math.js file).
+* If the module fails to load (e.g., due to network issues or if the file is missing), the promise is rejected, and the error is handled in the .catch() block, logging an appropriate error message.
